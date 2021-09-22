@@ -1,15 +1,21 @@
 const $root = document.querySelector('#ab')
+$root.classList.add('container')
+
+const $h1 = createElement('h1', $root,'hello world')
 
 const $input = createElement('input', $root)
-const $buttonAdd = createButton('button', 'add', createTask)
+$input.addEventListener('keypress', createTask)
+
+const $buttonAdd = createButton('button', 'Add', createTask)
 
 const $filter = createElement('select', $root)
-$filter.style.marginLeft = '20px'
-const $option1 = createElement('option', $filter,'all')
-const $option2 = createElement('option', $filter,'realised')
-const $option3 = createElement('option', $filter, 'not realised')
-const list = createElement('ol',$root)
-list.style.width='300px'   
+const $option1 = createElement('option', $filter,'All')
+const $option2 = createElement('option', $filter,'Realised')
+const $option3 = createElement('option', $filter, 'Not realised')
+
+const list = createElement('ul',$root)
+
+// Utils
 
 function createElement(name, parent, text = '') {
     const element = document.createElement(name)
@@ -26,51 +32,63 @@ function createButton(name, name2, callbackFunction) {
     return newButton
 }
 
-function createTask () {
-    let valueOInput = $input.value
-    let task = createElement('li', list, valueOInput)
-    task.addEventListener("click", realisedTask)
-    task.style.color = "black"
+//Input create task
 
-
-    let crossRemove = createElement('img', task)
-    crossRemove.src = 'crossed.png'
-    crossRemove.style.paddingLeft= '20px'
-    crossRemove.addEventListener("click", removeTask)
-    $input.value = ''
-    return task
+function createTask (e) {
+    if(e.type ==='click' || e.key ==='Enter'){
+        let valueOInput = $input.value
+        let task = createElement('li', list, valueOInput)
+        task.addEventListener("click", realisedTask)
+        task.style.color = "black"
+    
+    
+        let crossRemove = createElement('img', task)
+        crossRemove.src = 'crossed.png'
+        crossRemove.addEventListener("click", removeTask)
+        $input.value = ''
+        return task
+    }
 }
+
+// Remove Task
 
 function removeTask() {
     this.parentNode.remove()
 }
 
+
+//Select realised task
+
 function realisedTask () {
     if(this.style.color ==="black") { 
-        this.style.color = 'red' 
-        this.style.transform='scale(1.1)'}
+        this.style.color = '#7f2525' 
+        this.style.borderLeft='4px solid green'
+        // this.style.transform='scale(1.1)'
+    }
     else{
         this.style.color ='black' 
-        this.style.transform='scale(1)'} 
+        this.style.borderLeft='0px solid green'
+        // this.style.transform='scale(1)'
+    } 
 }
 
+
+//Filter
+
 $filter.addEventListener('change', function() {
-    console.log()
     switch(this.value) {
-        case 'realised':   
+        case 'Realised':   
             for (let i = 0; i < list.children.length; i++) {
                 list.children[i].hidden = false
-                console.log(list.children[i].style.color)
                 if(list.children[i].style.color==='black'){
                     list.children[i].hidden = true
                 };
             };
             break;
-        case 'not realised':   
+        case 'Not realised':   
             for (let i = 0; i < list.children.length; i++) {
                 list.children[i].hidden = false
-                console.log(list.children[i].style.color)
-                if(list.children[i].style.color==='red'){
+                if(list.children[i].style.color==='rgb(127, 37, 37)'){
                     list.children[i].hidden = true
                 };
             };

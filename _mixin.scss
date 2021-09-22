@@ -1,0 +1,11 @@
+@mixin  fontColor($size,$backgrundColor) {
+    // font-family: "Mirabel";
+    font-family: 'Indie Flower', cursive;
+    font-size: $size;
+    background: $backgrundColor;
+};
+
+@mixin margin($left, $bottom) {
+    margin-left: $left;
+    margin-bottom: $bottom;
+};

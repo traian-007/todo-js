@@ -1,0 +1,70 @@
+@import './_variables.scss';
+@import './_mixin';
+
+.container {
+    @include fontColor(20px,$colorContainer);
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px 0;
+
+    h1 {
+        @include margin(20px, 30px);
+        text-transform: uppercase;
+    }
+
+    input {
+        @include margin(20px, 30px);
+        @include fontColor(23px,rgba(0, 0, 0, 0.1));
+        width: 350px;
+        border: transparent;
+        border-radius: 5px;
+        height: 21px;
+        padding: 10px 5px 10px 10px;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        @include margin(5px, 0px);
+        @include fontColor(20px,$colorBttn);
+        border-radius: 5px;
+        border: transparent;
+        padding: 6px;
+        cursor: pointer;
+        &:hover {
+            color: red;
+        }
+    }
+
+    select {
+        @include margin(20px, 0px);
+        @include fontColor(14px,$colorSelect);
+        border-radius: 2px;
+        padding: 4px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-inline-start: 20px;
+
+        li {
+            @include fontColor(24px,$colorLi);
+            @include margin(0px, 10px);
+            width: 400px;
+            position: relative;
+            border-radius: 2px;
+            box-shadow: 5px 7px 8px -4px #888888;
+            padding: 10px;
+            cursor: pointer;
+
+            img {
+                position: absolute;
+                right: 5px;
+                top: 15px;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
